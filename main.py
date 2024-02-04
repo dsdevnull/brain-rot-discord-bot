@@ -54,6 +54,10 @@ async def play(
 
     # Wait until the audio finishes playing
     while vc.is_playing():
+        # Send a success message
+        await inter.response.send_message(
+            "MP3 playback completed successfully!", ephemeral=True
+        )
         await asyncio.sleep(0.25)
 
     # Disconnect from the voice channel
