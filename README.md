@@ -25,3 +25,5 @@ After installing FFmpeg:
 `pip install .`
 
 I recommand using an venv to run all python programs.
+
+https://www.coolfundas.com/youtube-videos-how-to-set-start-and-end-time-easily/

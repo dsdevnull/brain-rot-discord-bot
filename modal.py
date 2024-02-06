@@ -23,7 +23,10 @@ class MyModal(disnake.ui.Modal):
 
         name = inter.text_values.get("name", "")
 
-        await download.getDownloadedAudio(name)
-
-        # Respond to the user (without embedding the input)
-        await inter.edit_original_message(content=f"Received Video: Name = {name}")
+        if await download.getDownloadedAudio(name, inter):
+            # Respond to the user (without embedding the input)
+            await inter.edit_original_message(content=f"Received Video: Name = {name}")
+        else:
+            await inter.edit_original_message(
+                content=f"Video '{name}' is age-restricted and cannot be downloaded."
+            )

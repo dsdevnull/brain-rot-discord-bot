@@ -3,15 +3,18 @@ from pytube import YouTube
 import os
 
 
-async def getDownloadedAudio(youtubeLink):
+async def getDownloadedAudio(youtubeLink, inter) -> bool:
     # url input from user
     yt = YouTube(youtubeLink)
+
+    if yt.age_restricted:
+        # Inform the user that the video is age-restricted
+        return False
 
     # extract only audio
     video = yt.streams.filter(only_audio=True).first()
 
     # check for destination to save file
-    print("Enter the destination (leave blank for current directory)")
     destination = "./sound/"
 
     # download the file
@@ -24,3 +27,4 @@ async def getDownloadedAudio(youtubeLink):
 
     # result of success
     print(yt.title + " has been successfully downloaded.")
+    return True

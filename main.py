@@ -46,6 +46,7 @@ async def play(
         await inter.response.send_message("You are not in a voice channel.")
         return
 
+    await inter.response.defer()
     # Connect to the voice channel
     vc = await voice_channel.connect()
 
@@ -55,13 +56,13 @@ async def play(
     # Wait until the audio finishes playing
     while vc.is_playing():
         # Send a success message
-        await inter.response.send_message(
-            "MP3 playback completed successfully!", ephemeral=True
-        )
-        await asyncio.sleep(0.25)
+        await asyncio.sleep(1)
 
     # Disconnect from the voice channel
     await vc.disconnect()
+
+    # Respond to the user (without embedding the input)
+    await inter.edit_original_message(content=f"Playback Sucessful")
 
 
 @bot.slash_command()
